@@ -14,6 +14,7 @@ export default function StarBackground() {
 
     // Set canvas size to window size
     const resizeCanvas = () => {
+      if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
@@ -27,6 +28,7 @@ export default function StarBackground() {
 
     // Initialize stars
     for (let i = 0; i < numStars; i++) {
+      if (!canvas) return;
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -37,6 +39,8 @@ export default function StarBackground() {
 
     // Animation loop
     function animate() {
+      if (!ctx || !canvas) return;
+      
       ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
