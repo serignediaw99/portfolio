@@ -146,7 +146,11 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <div className="h-16"></div>
+      <footer className="py-8 bg-white dark:bg-gray-900">
+        <div className="text-center text-stone-600 dark:text-stone-400 text-sm">
+          Copyright © 2025 Serigne Diaw. All rights reserved.
+        </div>
+      </footer>
     </main>
   );
 }
