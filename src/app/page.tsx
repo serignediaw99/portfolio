@@ -132,7 +132,7 @@ export default function Home() {
                 serigne_diaw@yahoo.com
               </a>
               <a 
-                href="https://www.linkedin.com/in/serignediaw" 
+                href="https://www.linkedin.com/in/serigne-diaw-11291b173/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-3xl text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 hover:-translate-y-2 transition-all duration-300 flex items-center gap-4"
