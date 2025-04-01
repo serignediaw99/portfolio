@@ -1,103 +1,152 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect, useState } from 'react';
+import Navbar from '@/components/Navbar';
+import HeroSection from '@/components/HeroSection';
+import ProjectCard from '@/components/ProjectCard';
+import SkillsSection from '@/components/SkillsSection';
+import ContactForm from '@/components/ContactForm';
+import Timeline from '@/components/Timeline';
+import EducationTimeline from '@/components/EducationTimeline';
+
+const projects = [
+  {
+    title: 'arXiv Research Tool',
+    description: 'Built an automated ETL pipeline using Airflow that fetches AI papers from arXiv, validates content, stores PDFs in Google Cloud, and catalogs metadata in MongoDB. Integrated LLM-powered summarization to extract key research insights and relevance scoring against user topics. Developed a Streamlit frontend for keyword-based discovery of AI research with accessible summaries.',
+    imageUrl: '/projects/arxiv-tool.jpg',
+    technologies: ['Airflow', 'GCS', 'Prompt Engineering', 'MongoDB', 'Streamlit'],
+    githubUrl: 'https://github.com/serignediaw99/arxiv-paper-summarizer',
+  },
+  {
+    title: 'Premier League Match Prediction',
+    description: 'Match prediction system using Markov Chain Monte Carlo (MCMC) methods to forecast Premier League soccer match outcomes. Features an automated ETL pipeline for data collection and achieved 55% prediction accuracy with granular probability estimates.',
+    imageUrl: '/projects/pl-prediction.jpg',
+    technologies: ['Python', 'MCMC', 'Beautiful Soup', 'PostgreSQL', 'scikit-learn'],
+    githubUrl: 'https://github.com/serignediaw99/PL-Match-Prediction',
+  },
+  {
+    title: 'Football Player Tracking',
+    description: 'Real-time player tracking system using computer vision and deep learning. Tracks player positions, movements, and interactions during matches.',
+    imageUrl: '/projects/football-tracking.jpg',
+    videoUrl: '/projects/football-tracking.mp4',
+    technologies: ['Python', 'OpenCV', 'PyTorch', 'Computer Vision'],
+    githubUrl: 'https://github.com/serignediaw99/football-tracking',
+    isVideo: true,
+  },
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isScrolled, setIsScrolled] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <main className="min-h-screen">
+      <Navbar isScrolled={isScrolled} />
+      <div id="intro" className="bg-gradient-to-b from-white via-white to-stone-50 dark:from-gray-900 dark:via-gray-900 dark:to-stone-900">
+        <HeroSection />
+      </div>
+      
+      {/* Experience Section */}
+      <div id="experience" className="py-24 bg-gradient-to-b from-stone-50 via-stone-100 to-stone-200 dark:from-stone-900 dark:via-stone-800 dark:to-stone-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 className="text-3xl font-bold text-stone-800 dark:text-stone-100 mb-12 text-center">
+            Experience
+          </h3>
+          <Timeline />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </div>
+
+      {/* Education Section */}
+      <div id="education" className="py-24 bg-gradient-to-b from-stone-200 via-stone-100 to-stone-50 dark:from-stone-700 dark:via-stone-800 dark:to-stone-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 className="text-3xl font-bold text-stone-800 dark:text-stone-100 mb-12 text-center">
+            Education
+          </h3>
+          <EducationTimeline />
+        </div>
+      </div>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-48 bg-gradient-to-b from-stone-50 via-stone-100 to-stone-200 dark:from-stone-900 dark:via-stone-800 dark:to-stone-700">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl font-bold text-stone-800 dark:text-stone-100 mb-4">
+              Featured Projects
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {projects.map((project, index) => (
+              <ProjectCard
+                key={index}
+                title={project.title}
+                description={project.description}
+                imageUrl={project.imageUrl}
+                videoUrl={project.videoUrl}
+                technologies={project.technologies}
+                githubUrl={project.githubUrl}
+                isVideo={project.isVideo}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-48 bg-gradient-to-b from-stone-200 via-stone-100 to-stone-50 dark:from-stone-700 dark:via-stone-800 dark:to-stone-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl font-bold text-stone-800 dark:text-stone-100 mb-4">
+              Skills & Technologies
+            </h2>
+          </div>
+          <SkillsSection />
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-48 bg-gradient-to-b from-stone-50 via-white to-white dark:from-stone-900 dark:via-gray-900 dark:to-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl font-bold text-stone-800 dark:text-stone-100 mb-4">
+              Contact
+            </h2>
+          </div>
+          <div className="max-w-4xl mx-auto bg-stone-50 dark:bg-stone-800 rounded-xl shadow-lg p-16">
+            <div className="flex flex-col items-center space-y-10">
+              <a 
+                href="mailto:serignediaw99@gmail.com" 
+                className="text-3xl text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 hover:-translate-y-1 transition-all duration-300 flex items-center gap-4"
+              >
+                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+                serigne_diaw@yahoo.com
+              </a>
+              <a 
+                href="https://www.linkedin.com/in/serignediaw" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-3xl text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 hover:-translate-y-2 transition-all duration-300 flex items-center gap-4"
+              >
+                <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div className="h-16"></div>
+    </main>
   );
 }
