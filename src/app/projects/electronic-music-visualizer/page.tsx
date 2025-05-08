@@ -14,7 +14,7 @@ import { TrackSuggestionsForm } from '@/components/track-suggestions-form';
 
 const visualizations = [
   {
-    title: "Porco Rosso",
+    title: "porco rosso",
     artist: "sunflwr",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746738227/porco_rosso_wnotmc.mp4",
     depth: 1.5,
