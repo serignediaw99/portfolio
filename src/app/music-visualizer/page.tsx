@@ -12,7 +12,7 @@ export default function MusicVisualizerPage() {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8">Music Visualizer</h1>
+        <h1 className="text-4xl font-bold mb-8">AI Song Visualizer</h1>
         {/* Add your music visualizer content here */}
       </div>
     </div>
