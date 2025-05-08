@@ -18,7 +18,7 @@ const visualizations = [
     artist: "sunflwr",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746738227/porco_rosso_wnotmc.mp4",
     depth: 1.5,
-    position: "top-[40%] left-[35%]",
+    position: "top-[40%] left-[33%]",
     size: "w-32 h-32 md:w-40 md:h-22"
   },
   {
@@ -26,7 +26,7 @@ const visualizations = [
     artist: "Swedish House Mafia",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746676376/calling_on_viz_hacdod.mp4",
     depth: 0.5,
-    position: "top-[30%] left-[25%]",
+    position: "top-[20%] left-[18%]",
     size: "w-24 h-24 md:w-32 md:h-32"
   },
   {
@@ -34,7 +34,7 @@ const visualizations = [
     artist: "Swedish House Mafia",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746676375/dont_go_mad_viz_nnwsny.mp4",
     depth: 1,
-    position: "top-[25%] left-[45%]",
+    position: "top-[16%] left-[48%]",
     size: "w-28 h-28 md:w-36 md:h-36"
   },
   {
@@ -50,7 +50,7 @@ const visualizations = [
     artist: "Mall Grab",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746676398/liverpool_viz_mei4gs.mp4",
     depth: 1,
-    position: "top-[50%] left-[20%]",
+    position: "top-[46%] left-[18%]",
     size: "w-28 h-28 md:w-36 md:h-36"
   },
   {
@@ -58,7 +58,7 @@ const visualizations = [
     artist: "Pretty Girl",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746677375/sun_phase_viz_tlafr8.mp4",
     depth: 1,
-    position: "top-[45%] left-[50%]",
+    position: "top-[40%] left-[50%]",
     size: "w-32 h-32 md:w-40 md:h-40"
   },
   {
@@ -74,7 +74,7 @@ const visualizations = [
     artist: "RÜFÜS DU SOL",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746676394/innerbloom_viz_evm3fv.mp4",
     depth: 1.5,
-    position: "top-[10%] left-[35%]",
+    position: "top-[8%] left-[35%]",
     size: "w-32 h-32 md:w-40 md:h-40"
   },
   {
@@ -82,7 +82,7 @@ const visualizations = [
     artist: "BICEP",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746676395/vale_viz_gmakrf.mp4",
     depth: 2,
-    position: "top-[15%] left-[75%]",
+    position: "top-[15%] left-[80%]",
     size: "w-28 h-28 md:w-36 md:h-36"
   },
   {
@@ -90,15 +90,15 @@ const visualizations = [
     artist: "Effy, Mall Grab",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746676393/iluv_viz_uax85b.mp4",
     depth: 1,
-    position: "top-[65%] left-[35%]",
-    size: "w-32 h-40 md:w-40 md:h-52"
+    position: "top-[62%] left-[35%]",
+    size: "w-32 h-36 md:w-40 md:h-50"
   },
   {
     title: "Hyperreal",
     artist: "Flume, KUČKA",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746676385/hyperreal_viz_xoasl5.mp4",
     depth: 1.5,
-    position: "top-[70%] left-[60%]",
+    position: "top-[67%] left-[55%]",
     size: "w-28 h-28 md:w-36 md:h-36"
   }
 ];
@@ -212,45 +212,51 @@ export default function MusicVisualizerPage() {
           <Floating sensitivity={-1} className="overflow-hidden w-full h-full">
             {visualizations.map((viz, index) => (
               <FloatingElement key={index} depth={viz.depth} className={viz.position}>
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className={`${viz.size} hover:scale-105 duration-200 cursor-pointer transition-transform rounded-lg shadow-lg bg-gray-100 overflow-hidden relative ${styles.animateFloat}`}
-                  onClick={() => handleVideoClick(viz)}
-                  style={{ zIndex: 1 }}
-                >
-                  <video
-                    id={`thumbnail-${index}`}
-                    width="100%"
-                    height="100%"
-                    src={viz.publicId}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="metadata"
-                    onPlay={() => {
-                      console.log(`Video ${index} started playing:`, viz.publicId);
-                      if (!loadedVideos.has(viz.publicId)) {
-                        setLoadingVideos(prev => new Set(prev).add(viz.publicId));
-                      }
-                    }}
-                    onLoadedData={() => {
-                      console.log(`Video ${index} loaded:`, viz.publicId);
-                      handleVideoLoad(viz.publicId);
-                    }}
-                    onError={(e) => {
-                      console.error(`Error loading video ${index}:`, {
-                        error: e,
-                        url: viz.publicId,
-                        element: e.target
-                      });
-                      handleVideoError(viz.publicId, e);
-                    }}
-                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                <div className="flex flex-col items-center gap-2">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className={`${viz.size} hover:scale-105 duration-200 cursor-pointer transition-transform rounded-lg shadow-lg bg-gray-100 overflow-hidden relative ${styles.animateFloat}`}
+                    onClick={() => handleVideoClick(viz)}
                     style={{ zIndex: 1 }}
-                  />
-                </motion.div>
+                  >
+                    <video
+                      id={`thumbnail-${index}`}
+                      width="100%"
+                      height="100%"
+                      src={viz.publicId}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      preload="metadata"
+                      onPlay={() => {
+                        console.log(`Video ${index} started playing:`, viz.publicId);
+                        if (!loadedVideos.has(viz.publicId)) {
+                          setLoadingVideos(prev => new Set(prev).add(viz.publicId));
+                        }
+                      }}
+                      onLoadedData={() => {
+                        console.log(`Video ${index} loaded:`, viz.publicId);
+                        handleVideoLoad(viz.publicId);
+                      }}
+                      onError={(e) => {
+                        console.error(`Error loading video ${index}:`, {
+                          error: e,
+                          url: viz.publicId,
+                          element: e.target
+                        });
+                        handleVideoError(viz.publicId, e);
+                      }}
+                      className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                      style={{ zIndex: 1 }}
+                    />
+                  </motion.div>
+                  <div className="text-center">
+                    <p className="text-gray-800 font-medium text-xs md:text-sm">{viz.title}</p>
+                    <p className="text-gray-600 text-[10px] md:text-xs">{viz.artist}</p>
+                  </div>
+                </div>
               </FloatingElement>
             ))}
           </Floating>
@@ -270,7 +276,7 @@ export default function MusicVisualizerPage() {
       {!selectedVideo && loadingVideos.size === 0 && (
         <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20">
           <Typewriter
-            text={["choose your track", "turn up the volume"]}
+            text={["choose a track", "turn up the volume"]}
             speed={50}
             loop={true}
             className="text-gray-800/60 text-xl font-mono tracking-wider"
