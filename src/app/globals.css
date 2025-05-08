@@ -28,7 +28,7 @@
 }
 
 :root {
-  --background: #ffffff;
+  --background: #f5efe6;
   --foreground: #171717;
 }
 
@@ -46,6 +46,6 @@
   }
 
   body {
-    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+    @apply bg-[#f5efe6] dark:bg-gray-900 text-gray-900 dark:text-white;
   }
 }
