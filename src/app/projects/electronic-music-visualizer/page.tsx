@@ -217,6 +217,7 @@ export default function MusicVisualizerPage() {
                   animate={{ opacity: 1 }}
                   className={`${viz.size} hover:scale-105 duration-200 cursor-pointer transition-transform rounded-lg shadow-lg bg-gray-100 overflow-hidden relative ${styles.animateFloat}`}
                   onClick={() => handleVideoClick(viz)}
+                  style={{ zIndex: 1 }}
                 >
                   <video
                     id={`thumbnail-${index}`}
@@ -246,7 +247,8 @@ export default function MusicVisualizerPage() {
                       });
                       handleVideoError(viz.publicId, e);
                     }}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                    style={{ zIndex: 1 }}
                   />
                 </motion.div>
               </FloatingElement>
@@ -326,6 +328,7 @@ export default function MusicVisualizerPage() {
                   setIsVideoLoading(false);
                 }}
                 style={{ objectFit: 'contain' }}
+                className="pointer-events-auto"
               />
             </div>
             <div className="mt-6">
