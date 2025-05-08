@@ -254,7 +254,7 @@ export default function MusicVisualizerPage() {
       {!selectedVideo && loadingVideos.size === 0 && (
         <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20">
           <Typewriter
-            text={["click on a video to play", "turn up the volume", "choose your track"]}
+            text={["choose your track", "turn up the volume"]}
             speed={50}
             loop={true}
             className="text-gray-800/60 text-xl font-mono tracking-wider"
