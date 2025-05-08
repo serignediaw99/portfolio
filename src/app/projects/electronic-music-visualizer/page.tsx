@@ -14,6 +14,14 @@ import { TrackSuggestionsForm } from '@/components/track-suggestions-form';
 
 const visualizations = [
   {
+    title: "Porco Rosso",
+    artist: "sunflwr",
+    publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746738227/porco_rosso_wnotmc.mp4",
+    depth: 1.5,
+    position: "top-[40%] left-[35%]",
+    size: "w-32 h-32 md:w-40 md:h-22"
+  },
+  {
     title: "Calling On",
     artist: "Swedish House Mafia",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746676376/calling_on_viz_hacdod.mp4",
