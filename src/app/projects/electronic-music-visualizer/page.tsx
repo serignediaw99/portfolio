@@ -10,6 +10,7 @@ import { CldVideoPlayer } from 'next-cloudinary';
 import { getCloudinaryUrlWithTransformations } from '@/lib/cloudinary';
 import { Typewriter } from '@/components/ui/typewriter-text';
 import styles from './styles.module.css';
+import { TrackSuggestionsForm } from '@/components/track-suggestions-form';
 
 const visualizations = [
   {
@@ -191,6 +192,11 @@ export default function MusicVisualizerPage() {
   return (
     <AuroraBackground className="min-h-screen bg-transparent">
       <div className="relative z-10">
+        {/* Track Suggestions Form */}
+        <div className="fixed -bottom-0 left-40 z-50">
+          <TrackSuggestionsForm />
+        </div>
+
         <div
           className="flex w-full h-screen justify-center items-center overflow-hidden"
           ref={scope}

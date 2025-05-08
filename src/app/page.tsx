@@ -10,6 +10,7 @@ import Timeline from '@/components/Timeline';
 import EducationTimeline from '@/components/EducationTimeline';
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import { GlowingEffect } from '@/components/ui/glowing-effect';
+import { TrackSuggestionsForm } from "@/components/track-suggestions-form"
 
 const projects = [
   {
