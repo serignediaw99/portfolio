@@ -20,8 +20,8 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Serigne Diaw | Software Engineer",
-  description: "Personal portfolio of Serigne Diaw, a software engineer specializing in web development.",
+  title: "Serigne Diaw | Data Scientist",
+  description: "Personal portfolio of Serigne Diaw, a data scientist.",
 };
 
 export default function RootLayout({
