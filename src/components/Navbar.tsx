@@ -63,7 +63,7 @@ export default function Navbar({ isScrolled }: NavbarProps) {
                 pathname === '/projects/electronic-music-visualizer' ? 'text-gray-900' : ''
               }`}
             >
-              Music Visualizer
+              AI Song Visualizer
             </Link>
           </div>
         </div>
