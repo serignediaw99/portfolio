@@ -14,6 +14,7 @@ interface ProjectCardProps {
   githubUrl?: string;
   technologies: string[];
   index: number;
+  isVideo?: boolean;
 }
 
 export default function ProjectCard({
@@ -24,6 +25,7 @@ export default function ProjectCard({
   githubUrl,
   technologies,
   index,
+  isVideo,
 }: ProjectCardProps) {
   const [mounted, setMounted] = useState(false);
   const projectUrl = `/projects/${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
