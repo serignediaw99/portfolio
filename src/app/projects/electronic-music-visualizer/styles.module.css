@@ -3,7 +3,7 @@
   50% { transform: translateY(-5px); }
   100% { transform: translateY(0px); }
 }
-
+ 
 .animateFloat {
   animation: float 2s ease-in-out infinite;
 } 

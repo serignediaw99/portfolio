@@ -106,7 +106,7 @@ const Floating = ({
           pointerEvents: "none",
           touchAction: "none"
         }}>
-          {children}
+        {children}
         </div>
       </div>
     </FloatingContext.Provider>

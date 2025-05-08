@@ -64,8 +64,8 @@ export default function ProjectCard({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="relative group"
@@ -73,70 +73,70 @@ export default function ProjectCard({
       {title === "Electronic Music Visualizer" ? (
         <Link href="/projects/electronic-music-visualizer" className="block">
           <div className="relative overflow-hidden rounded-lg bg-stone-100 dark:bg-stone-800 shadow-lg transition-all duration-300 hover:shadow-xl">
-            <div className="relative w-full aspect-video bg-stone-100 dark:bg-stone-700">
+        <div className="relative w-full aspect-video bg-stone-100 dark:bg-stone-700">
               {title.includes('Premier League') ? (
-                <div className="absolute inset-0">
-                  <PredictionTable />
-                </div>
-              ) : videoUrl ? (
-                <video
-                  src={videoUrl}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
+            <div className="absolute inset-0">
+              <PredictionTable />
+            </div>
+          ) : videoUrl ? (
+            <video
+              src={videoUrl}
+              autoPlay
+              loop
+              muted
+              playsInline
                   preload="metadata"
                   className="absolute inset-0 w-full h-full object-cover"
-                />
-              ) : (
-                <Image
-                  src={imageUrl}
-                  alt={title}
-                  fill
+            />
+          ) : (
+            <Image
+              src={imageUrl}
+              alt={title}
+              fill
                   className={`object-cover ${title.includes('arXiv') ? 'object-top' : ''}`}
-                />
-              )}
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-semibold text-stone-800 dark:text-stone-100 mb-2 flex items-center gap-2">
-                {title}
+            />
+          )}
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold text-stone-800 dark:text-stone-100 mb-2 flex items-center gap-2">
+            {title}
                 {title.includes('Premier League') && (
-                  <Image
-                    src="/logos/premier-league.png"
-                    alt="Premier League"
-                    width={36}
-                    height={36}
-                    className="inline-block"
-                  />
-                )}
-              </h3>
-              <p className="text-stone-600 dark:text-stone-300 mb-4">
-                {description}
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 bg-stone-200 dark:bg-stone-700 text-stone-800 dark:text-stone-200 rounded-full text-sm"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <div className="flex gap-4">
-                {githubUrl && (
-                  <a
-                    href={githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-stone-600 dark:text-stone-300 hover:text-stone-800 dark:hover:text-stone-100 transition-colors duration-300"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    GitHub
-                  </a>
-                )}
-              </div>
-            </div>
+              <Image
+                src="/logos/premier-league.png"
+                alt="Premier League"
+                width={36}
+                height={36}
+                className="inline-block"
+              />
+            )}
+          </h3>
+          <p className="text-stone-600 dark:text-stone-300 mb-4">
+            {description}
+          </p>
+          <div className="flex flex-wrap gap-2 mb-4">
+            {technologies.map((tech) => (
+              <span
+                key={tech}
+                className="px-3 py-1 bg-stone-200 dark:bg-stone-700 text-stone-800 dark:text-stone-200 rounded-full text-sm"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+          <div className="flex gap-4">
+            {githubUrl && (
+              <a
+                href={githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone-600 dark:text-stone-300 hover:text-stone-800 dark:hover:text-stone-100 transition-colors duration-300"
+                onClick={(e) => e.stopPropagation()}
+              >
+                GitHub
+              </a>
+            )}
+          </div>
+        </div>
           </div>
         </Link>
       ) : (
@@ -207,6 +207,6 @@ export default function ProjectCard({
           </div>
         </div>
       )}
-    </motion.div>
+      </motion.div>
   );
 } 

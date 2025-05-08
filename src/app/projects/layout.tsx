@@ -23,7 +23,7 @@ export default function ProjectsLayout({
     <>
       <Navbar isScrolled={isScrolled} />
       <main className="relative z-0">
-        {children}
+      {children}
       </main>
     </>
   );
