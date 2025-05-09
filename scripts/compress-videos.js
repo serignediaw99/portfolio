@@ -2,6 +2,9 @@ const ffmpeg = require('fluent-ffmpeg');
 const path = require('path');
 const fs = require('fs');
 
+// Set the ffmpeg path
+ffmpeg.setFfmpegPath('/opt/homebrew/bin/ffmpeg');
+
 // Get the video name from command line arguments if provided
 const videoName = process.argv[2];
 
@@ -19,11 +22,20 @@ function compressVideo(inputPath, outputPath) {
   return new Promise((resolve, reject) => {
     ffmpeg(inputPath)
       .outputOptions([
-        '-c:v libx264',  // Use H.264 codec
-        '-crf 23',       // Constant Rate Factor (18-28 is good, lower = better quality)
-        '-preset medium', // Encoding preset (slower = better compression)
-        '-c:a aac',      // Audio codec
-        '-b:a 128k'      // Audio bitrate
+        '-c:v libx264',     // Use H.264 codec
+        '-crf 32',          // Even more aggressive compression (28 -> 32)
+        '-preset veryslow', // Slowest preset for best compression
+        '-vf scale=640:-2', // Scale down to 640p width, maintain aspect ratio
+        '-c:a aac',         // Audio codec
+        '-b:a 64k',         // Further reduced audio bitrate (96k -> 64k)
+        '-movflags +faststart', // Enable fast start for web playback
+        '-profile:v baseline', // Use baseline profile for better compatibility
+        '-level 3.0',        // Set H.264 level
+        '-maxrate 1000k',    // Lower maximum bitrate (1500k -> 1000k)
+        '-bufsize 1500k',    // Adjusted buffer size
+        '-tune fastdecode',  // Optimize for fast decoding
+        '-pix_fmt yuv420p',  // Use more compatible pixel format
+        '-g 30'             // Keyframe every 30 frames
       ])
       .output(outputPath)
       .on('end', () => {

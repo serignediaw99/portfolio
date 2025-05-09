@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from "react";
-import { motion, stagger, useAnimate } from "motion/react";
+import { motion, stagger, useAnimate, AnimatePresence } from "motion/react";
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import Floating, { FloatingElement } from '@/components/ui/parallax-floating';
 import { createPortal } from 'react-dom';
@@ -13,6 +13,14 @@ import styles from './styles.module.css';
 import { TrackSuggestionsForm } from '@/components/track-suggestions-form';
 
 const visualizations = [
+  {
+    title: "What Else Is There? - DJ Tennis Remix",
+    artist: "Röyksopp",
+    publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746772577/Ro%CC%88yksopp_-_What_Else_Is_There__ft._Fever_Ray_DJ_Tennis_Remix_Official_Audio_c4hz5j.mp4",
+    depth: 1.0,
+    position: "top-[40%] left-[80%]",
+    size: "w-28 h-28 md:w-36 md:h-36"
+  },
   {
     title: "TRACK UNO",
     artist: "KAYTRANADA",
@@ -120,6 +128,9 @@ export default function MusicVisualizerPage() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const previousVideoRef = useRef<HTMLVideoElement | null>(null);
   const [isVideoLoading, setIsVideoLoading] = useState(false);
+  const [clickedPosition, setClickedPosition] = useState<{ x: number; y: number } | null>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const modalVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -166,8 +177,17 @@ export default function MusicVisualizerPage() {
     });
   };
 
-  const handleVideoClick = (video: typeof visualizations[0]) => {
+  const handleVideoClick = (video: typeof visualizations[0], event: React.MouseEvent) => {
     setIsVideoLoading(true);
+    setIsVideoReady(false);
+    
+    // Store the clicked position
+    const rect = event.currentTarget.getBoundingClientRect();
+    setClickedPosition({
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2
+    });
+    
     // Clean up previous video if it exists
     if (previousVideoRef.current) {
       previousVideoRef.current.pause();
@@ -186,6 +206,7 @@ export default function MusicVisualizerPage() {
       videoRef.current.load();
     }
     setSelectedVideo(null);
+    setClickedPosition(null);
     setIsVideoLoading(false);
   };
 
@@ -224,10 +245,15 @@ export default function MusicVisualizerPage() {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className={`${viz.size} hover:scale-105 duration-200 cursor-pointer transition-transform rounded-lg shadow-lg bg-gray-100 overflow-hidden relative ${styles.animateFloat}`}
-                    onClick={() => handleVideoClick(viz)}
-                    style={{ zIndex: 1 }}
+                    className={`${viz.size} hover:scale-105 duration-200 cursor-pointer transition-all rounded-lg overflow-hidden relative ${styles.animateFloat}`}
+                    onClick={(e) => handleVideoClick(viz, e)}
+                    style={{ 
+                      zIndex: 1,
+                      boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+                      background: '#1a1a1a'
+                    }}
                   >
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/30 pointer-events-none" />
                     <video
                       id={`thumbnail-${index}`}
                       width="100%"
@@ -294,65 +320,95 @@ export default function MusicVisualizerPage() {
 
       {/* Video Modal */}
       {mounted && selectedVideo && createPortal(
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4 md:p-0"
-          onClick={handleCloseModal}
-          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
-        >
+        <AnimatePresence mode="wait">
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            className="relative w-full md:w-[700px] bg-white rounded-lg p-2 md:p-4"
-            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4 md:p-0"
+            onClick={handleCloseModal}
+            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
           >
-            <div className="relative group">
-              {isVideoLoading && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg">
-                  <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-                </div>
-              )}
-              <video
-                id={`modal-${selectedVideo.publicId}`}
-                width="100%"
-                height="100%"
-                src={selectedVideo.publicId}
-                autoPlay
-                playsInline
-                loop
-                controls
-                preload="auto"
-                onPlay={() => {
-                  console.log('Modal video started playing:', selectedVideo.publicId);
-                  setIsVideoLoading(false);
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 300,
+                damping: 30,
+                duration: 0.3
+              }}
+              className="relative w-full md:w-[700px] bg-white rounded-lg p-2 md:p-4"
+              onClick={(e) => e.stopPropagation()}
+              layoutId={`container-${selectedVideo.publicId}`}
+            >
+              <div className="relative group">
+                {isVideoLoading && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg">
+                    <div className="w-8 h-8 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                )}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: isVideoReady ? 1 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-full h-full"
+                >
+                  <video
+                    ref={modalVideoRef}
+                    width="100%"
+                    height="100%"
+                    src={selectedVideo.publicId}
+                    autoPlay
+                    playsInline
+                    loop
+                    controls
+                    preload="auto"
+                    onCanPlay={() => {
+                      console.log('Modal video can play:', selectedVideo.publicId);
+                      setIsVideoReady(true);
+                      setIsVideoLoading(false);
+                    }}
+                    onLoadedData={() => {
+                      console.log('Modal video loaded:', selectedVideo.publicId);
+                      setIsVideoReady(true);
+                      setIsVideoLoading(false);
+                    }}
+                    onError={(e) => {
+                      console.error('Error loading modal video:', {
+                        error: e,
+                        url: selectedVideo.publicId,
+                        element: e.target
+                      });
+                      setIsVideoLoading(false);
+                    }}
+                    style={{ objectFit: 'contain' }}
+                    className="pointer-events-auto"
+                  />
+                </motion.div>
+              </div>
+              <motion.div 
+                className="mt-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 300,
+                  damping: 30,
+                  delay: 0.2 
                 }}
-                onLoadedData={() => {
-                  console.log('Modal video loaded:', selectedVideo.publicId);
-                  setIsVideoLoading(false);
-                }}
-                onError={(e) => {
-                  console.error('Error loading modal video:', {
-                    error: e,
-                    url: selectedVideo.publicId,
-                    element: e.target
-                  });
-                  setIsVideoLoading(false);
-                }}
-                style={{ objectFit: 'contain' }}
-                className="pointer-events-auto"
-              />
-            </div>
-            <div className="mt-6">
-              <MorphingText 
-                texts={[selectedVideo.title, selectedVideo.artist]} 
-                className="text-gray-800 text-2xl font-bold tracking-wide h-12 [&_span.italic]:text-gray-400"
-              />
-            </div>
+              >
+                <MorphingText 
+                  texts={[selectedVideo.title, selectedVideo.artist]} 
+                  className="text-gray-800 text-2xl font-bold tracking-wide h-12 [&_span.italic]:text-gray-400"
+                />
+              </motion.div>
+            </motion.div>
           </motion.div>
-        </motion.div>,
+        </AnimatePresence>,
         document.body
       )}
     </AuroraBackground>
