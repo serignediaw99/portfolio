@@ -14,6 +14,14 @@ import { TrackSuggestionsForm } from '@/components/track-suggestions-form';
 
 const visualizations = [
   {
+    title: "Weekend",
+    artist: "Flume",
+    publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746820506/Flume_-_Weekend_feat._Moses_Sumney_pxbojt.mp4",
+    depth: 2.5,
+    position: "top-[75%] left-[85%]",
+    size: "w-28 h-28 md:w-36 md:h-36"
+  },
+  {
     title: "What Else Is There? - DJ Tennis Remix",
     artist: "Röyksopp",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746773037/Ro%CC%88yksopp_-_What_Else_Is_There__ft._Fever_Ray_DJ_Tennis_Remix_Official_Audio_oauqug.mp4",

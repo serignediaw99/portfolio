@@ -12,8 +12,8 @@ const videoName = process.argv[2];
 const inputDir = '/Users/serignediaw/Documents/Personal-Projects/music-visualizer/viz';
 const outputDir = '/Users/serignediaw/Documents/Personal-Projects/music-visualizer/compressed-viz';
 
-// Maximum file size in bytes (100MB)
-const MAX_FILE_SIZE = 100 * 1024 * 1024;
+// Target file size in bytes (100MB)
+const TARGET_FILE_SIZE = 100 * 1024 * 1024;
 
 // Ensure output directory exists
 if (!fs.existsSync(outputDir)) {
@@ -32,24 +32,16 @@ function compressVideo(inputPath, outputPath) {
     const inputSize = getFileSizeInMB(inputPath);
     console.log(`📊 Original file size: ${inputSize.toFixed(2)}MB`);
 
-    // Start with high quality settings
-    let crf = 23;
-    let scale = '1080:-2'; // Start with 1080p
-
-    // If input is larger than 100MB, use more aggressive settings
-    if (inputSize > 100) {
-      crf = 28;
-      scale = '720:-2';
-    }
+    // Use less aggressive settings to target ~100MB
+    const crf = 20; // Lower CRF for better quality
 
     ffmpeg(inputPath)
       .outputOptions([
         '-c:v libx264',     // Use H.264 codec
-        `-crf ${crf}`,      // Constant Rate Factor
+        `-crf ${crf}`,      // Constant Rate Factor (lower = better quality)
         '-preset medium',   // Encoding preset
-        `-vf scale=${scale}`, // Scale video
         '-c:a aac',         // Audio codec
-        '-b:a 128k',        // Audio bitrate
+        '-b:a 192k',        // Higher audio bitrate
         '-movflags +faststart' // Enable fast start for web playback
       ])
       .output(outputPath)
@@ -58,9 +50,9 @@ function compressVideo(inputPath, outputPath) {
         console.log(`✅ Compressed: ${path.basename(inputPath)}`);
         console.log(`📊 Compressed size: ${outputSize.toFixed(2)}MB`);
         
-        // If still too large, try again with more aggressive settings
-        if (outputSize > 100) {
-          console.log('⚠️ File still too large, trying more aggressive compression...');
+        // If still too large, try again with slightly more aggressive settings
+        if (outputSize > TARGET_FILE_SIZE) {
+          console.log('⚠️ File still too large, trying slightly more aggressive compression...');
           fs.unlinkSync(outputPath); // Delete the too-large file
           compressVideo(inputPath, outputPath).then(resolve).catch(reject);
         } else {
