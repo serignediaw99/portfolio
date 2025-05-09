@@ -16,7 +16,7 @@ const visualizations = [
   {
     title: "What Else Is There? - DJ Tennis Remix",
     artist: "Röyksopp",
-    publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746772577/Ro%CC%88yksopp_-_What_Else_Is_There__ft._Fever_Ray_DJ_Tennis_Remix_Official_Audio_c4hz5j.mp4",
+    publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746773037/Ro%CC%88yksopp_-_What_Else_Is_There__ft._Fever_Ray_DJ_Tennis_Remix_Official_Audio_oauqug.mp4",
     depth: 1.0,
     position: "top-[40%] left-[80%]",
     size: "w-28 h-28 md:w-36 md:h-36"
