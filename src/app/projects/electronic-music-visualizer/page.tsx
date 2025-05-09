@@ -201,18 +201,18 @@ export default function MusicVisualizerPage() {
     <AuroraBackground className="min-h-screen bg-transparent">
       <div className="relative z-10">
         {/* Track Suggestions Form */}
-        <div className="fixed -bottom-0 left-40 z-50">
+        <div className="fixed -bottom-0 left-1/2 -translate-x-1/2 md:left-40 md:translate-x-0 z-50">
           <TrackSuggestionsForm />
         </div>
 
         <div
-          className="flex w-full h-screen justify-center items-center overflow-hidden"
+          className="flex w-full h-screen justify-center items-center overflow-hidden px-4 md:px-0"
           ref={scope}
         >
           <Floating sensitivity={-1} className="overflow-hidden w-full h-full">
             {visualizations.map((viz, index) => (
-              <FloatingElement key={index} depth={viz.depth} className={viz.position}>
-                <div className="flex flex-col items-center gap-2">
+              <FloatingElement key={index} depth={viz.depth} className={`${viz.position} scale-75 md:scale-100`}>
+                <div className="flex flex-col items-center gap-1 md:gap-2">
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -265,8 +265,8 @@ export default function MusicVisualizerPage() {
 
       {/* Loading indicator */}
       {loadingVideos.size > 0 && loadedVideos.size === 0 && (
-        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-20">
-          <p className="text-gray-800/60 text-base font-medium tracking-wide">
+        <div className="fixed bottom-16 md:bottom-24 left-1/2 -translate-x-1/2 z-20">
+          <p className="text-gray-800/60 text-sm md:text-base font-medium tracking-wide">
             Loading videos... ({loadingVideos.size} remaining)
           </p>
         </div>
@@ -274,12 +274,12 @@ export default function MusicVisualizerPage() {
 
       {/* Click hint text */}
       {!selectedVideo && loadingVideos.size === 0 && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-20">
+        <div className="fixed bottom-4 md:bottom-8 left-1/2 -translate-x-1/2 z-20">
           <Typewriter
             text={["choose a track", "turn up the volume"]}
             speed={50}
             loop={true}
-            className="text-gray-800/60 text-xl font-mono tracking-wider"
+            className="text-gray-800/60 text-base md:text-xl font-mono tracking-wider"
           />
         </div>
       )}
@@ -290,7 +290,7 @@ export default function MusicVisualizerPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4 md:p-0"
           onClick={handleCloseModal}
           style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
         >
@@ -298,7 +298,7 @@ export default function MusicVisualizerPage() {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="relative w-[700px] bg-white rounded-lg p-4"
+            className="relative w-full md:w-[700px] bg-white rounded-lg p-2 md:p-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative group">
