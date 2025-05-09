@@ -340,7 +340,7 @@ export default function MusicVisualizerPage() {
             <div className="mt-6">
               <MorphingText 
                 texts={[selectedVideo.title, selectedVideo.artist]} 
-                className="text-gray-800 text-2xl font-bold tracking-wide h-12"
+                className="text-gray-800 text-2xl font-bold tracking-wide h-12 [&_span.italic]:text-gray-400"
               />
             </div>
           </motion.div>

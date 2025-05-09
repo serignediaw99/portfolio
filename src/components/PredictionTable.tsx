@@ -125,7 +125,7 @@ const predictions: MatchPrediction[] = [
     expectedAwayGoals: 1.069454,
     homeTeamLogo: '/logos/fulham.png',
     awayTeamLogo: '/logos/manutd.png',
-  },
+  }
 ];
 
 export default function PredictionTable() {
