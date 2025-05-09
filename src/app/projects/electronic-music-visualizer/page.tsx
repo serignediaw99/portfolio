@@ -14,6 +14,14 @@ import { TrackSuggestionsForm } from '@/components/track-suggestions-form';
 
 const visualizations = [
   {
+    title: "TRACK UNO",
+    artist: "KAYTRANADA",
+    publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746762356/TRACK_UNO_urnw6k.mp4",
+    depth: 1.5,
+    position: "top-[30%] left-[3%]",
+    size: "w-28 h-28 md:w-36 md:h-36"
+  },
+  {
     title: "Apricots",
     artist: "BICEP",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746755306/BICEP_APRICOTS_Official_Video_io19ld.mp4",
