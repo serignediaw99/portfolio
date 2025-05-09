@@ -14,6 +14,14 @@ import { TrackSuggestionsForm } from '@/components/track-suggestions-form';
 
 const visualizations = [
   {
+    title: "Apricots",
+    artist: "BICEP",
+    publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746755306/BICEP_APRICOTS_Official_Video_io19ld.mp4",
+    depth: 1.5,
+    position: "top-[16%] left-[48%]",
+    size: "w-28 h-28 md:w-36 md:h-36"
+  },
+  {
     title: "porco rosso",
     artist: "sunflwr",
     publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746738227/porco_rosso_wnotmc.mp4",
@@ -28,14 +36,6 @@ const visualizations = [
     depth: 0.5,
     position: "top-[20%] left-[18%]",
     size: "w-24 h-24 md:w-32 md:h-32"
-  },
-  {
-    title: "Don't Go Mad (feat. Seinabo Sey)",
-    artist: "Swedish House Mafia",
-    publicId: "https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746676375/dont_go_mad_viz_nnwsny.mp4",
-    depth: 1,
-    position: "top-[16%] left-[48%]",
-    size: "w-28 h-28 md:w-36 md:h-36"
   },
   {
     title: "Lights Out",
