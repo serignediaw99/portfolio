@@ -1,0 +1,19 @@
+rules_version = '2';
+
+// Craft rules based on data in your Firestore database
+// allow write: if firestore.get(
+//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Allow public read access to videos
+    match /videos/{videoName} {
+      // Anyone can view and upload videos (for development purposes only)
+      allow read, write: if true;
+    }
+    
+    // Default rule - deny access to other folders
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
