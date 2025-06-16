@@ -37,11 +37,14 @@ export function CustomCursor() {
             isPointer ? 'scale-150' : 'scale-100'
           }`}
         >
-          <div className="w-4 h-4 bg-black rounded-full" />
+          <div className={`w-4 h-4 ${isPointer ? 'bg-blue-500' : 'bg-black'} rounded-full`} />
         </div>
       </div>
       <style jsx global>{`
         * {
+          cursor: none !important;
+        }
+        a, button, [role="button"], input, select, textarea, [tabindex]:not([tabindex="-1"]) {
           cursor: none !important;
         }
       `}</style>
