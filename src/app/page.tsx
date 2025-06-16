@@ -17,7 +17,7 @@ const projects = [
     title: 'Electronic Music Visualizer',
     description: 'A dynamic visualizer that leverages StyleGAN2‑ADA to translate musical features—beats, harmony, timbre—into smoothly evolving GAN‑generated imagery. By mapping onset, chroma, and RMS envelopes to multi‑scale latent and noise modulations, it produces continuously morphing "landscapes" that pulse, color‑shift, and flow in time with any track.',
     imageUrl: '/projects/music-visualizer.jpg',
-    videoUrl: 'https://res.cloudinary.com/dlkzxzqpy/video/upload/v1746677385/music-visualizer_iatuyv.mp4',
+    videoUrl: 'https://firebasestorage.googleapis.com/v0/b/portfolio-4029a.firebasestorage.app/o/videos%2Fmusic-visualizer.mp4?alt=media&chunked=true&max-age=86400',
     technologies: ['Deep Learning', 'PyTorch', 'StyleGan'],
     githubUrl: 'https://github.com/serignediaw99/music-visualizer',
     isVideo: true,
